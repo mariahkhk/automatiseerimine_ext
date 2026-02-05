@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 6" refX="10" refY="3" markerWidth="10" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,3 L0,6 Z" fill="#64748b"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 6" refX="10" refY="3" markerWidth="10" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,3 L0,6 Z" fill="#dc2626"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 6" refX="10" refY="3" markerWidth="10" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,3 L0,6 Z" fill="#16a34a"/>
+    </marker>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="116%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="520" fill="#f8fafc" rx="8"/>
+
+  <!-- Title -->
+  <text x="500" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">CI/CD Pipeline Flow</text>
+  <text x="500" y="54" text-anchor="middle" font-size="12" fill="#64748b">GitHub Actions: git push → validate → test → build → GHCR</text>
+
+  <!-- === ROW 1: Developer actions === -->
+  <!-- git push -->
+  <rect x="40" y="80" width="130" height="60" rx="8" fill="#1e293b" filter="url(#shadow)"/>
+  <text x="105" y="107" text-anchor="middle" font-size="13" font-weight="600" fill="#f8fafc">git push</text>
+  <text x="105" y="124" text-anchor="middle" font-size="10" fill="#94a3b8">main branch</text>
+
+  <!-- Arrow to GitHub -->
+  <line x1="170" y1="110" x2="215" y2="110" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- GitHub receives -->
+  <rect x="220" y="80" width="140" height="60" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="290" y="107" text-anchor="middle" font-size="13" font-weight="600" fill="#1e293b">GitHub</text>
+  <text x="290" y="124" text-anchor="middle" font-size="10" fill="#64748b">triggers workflow</text>
+
+  <!-- Arrow down to pipeline -->
+  <line x1="290" y1="140" x2="290" y2="175" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- === ROW 2: Pipeline stages === -->
+  <!-- Pipeline background -->
+  <rect x="30" y="180" width="940" height="100" rx="10" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="50" y="200" font-size="10" font-weight="600" fill="#3b82f6">GITHUB ACTIONS PIPELINE</text>
+
+  <!-- Stage 1: Validate -->
+  <rect x="60" y="212" width="170" height="54" rx="6" fill="#fff" stroke="#86efac" stroke-width="2" filter="url(#shadow)"/>
+  <text x="145" y="234" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">1. VALIDATE</text>
+  <text x="145" y="252" text-anchor="middle" font-size="10" fill="#64748b">py_compile app.py</text>
+  <circle cx="75" cy="233" r="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="75" y="237" text-anchor="middle" font-size="10" fill="#16a34a">✓</text>
+
+  <!-- Arrow -->
+  <line x1="230" y1="239" x2="275" y2="239" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow-green)"/>
+  <text x="253" y="232" text-anchor="middle" font-size="9" fill="#16a34a">pass</text>
+
+  <!-- Stage 2: Test -->
+  <rect x="280" y="212" width="170" height="54" rx="6" fill="#fff" stroke="#86efac" stroke-width="2" filter="url(#shadow)"/>
+  <text x="365" y="234" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">2. TEST</text>
+  <text x="365" y="252" text-anchor="middle" font-size="10" fill="#64748b">pytest (äriloogika)</text>
+  <circle cx="295" cy="233" r="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="295" y="237" text-anchor="middle" font-size="10" fill="#16a34a">✓</text>
+
+  <!-- Arrow -->
+  <line x1="450" y1="239" x2="495" y2="239" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow-green)"/>
+  <text x="473" y="232" text-anchor="middle" font-size="9" fill="#16a34a">pass</text>
+
+  <!-- Stage 3: Build -->
+  <rect x="500" y="212" width="170" height="54" rx="6" fill="#fff" stroke="#86efac" stroke-width="2" filter="url(#shadow)"/>
+  <text x="585" y="234" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">3. BUILD</text>
+  <text x="585" y="252" text-anchor="middle" font-size="10" fill="#64748b">docker build + test</text>
+  <circle cx="515" cy="233" r="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="515" y="237" text-anchor="middle" font-size="10" fill="#16a34a">✓</text>
+
+  <!-- Arrow -->
+  <line x1="670" y1="239" x2="715" y2="239" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow-green)"/>
+  <text x="693" y="232" text-anchor="middle" font-size="9" fill="#16a34a">pass</text>
+
+  <!-- Stage 4: Push -->
+  <rect x="720" y="212" width="170" height="54" rx="6" fill="#fff" stroke="#86efac" stroke-width="2" filter="url(#shadow)"/>
+  <text x="805" y="234" text-anchor="middle" font-size="12" font-weight="700" fill="#1e293b">4. PUSH</text>
+  <text x="805" y="252" text-anchor="middle" font-size="10" fill="#64748b">ghcr.io/repo:sha</text>
+  <circle cx="735" cy="233" r="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="735" y="237" text-anchor="middle" font-size="10" fill="#16a34a">✓</text>
+
+  <!-- === ROW 3: Failure paths === -->
+  <!-- Fail arrow from Validate -->
+  <line x1="145" y1="266" x2="145" y2="310" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow-red)"/>
+  <rect x="60" y="315" width="170" height="40" rx="6" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+  <text x="145" y="335" text-anchor="middle" font-size="10" font-weight="600" fill="#dc2626">Süntaksiviga (koolon puudu)</text>
+  <text x="145" y="348" text-anchor="middle" font-size="9" fill="#dc2626">pipeline peatub kohe</text>
+
+  <!-- Fail arrow from Test -->
+  <line x1="365" y1="266" x2="365" y2="310" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow-red)"/>
+  <rect x="280" y="315" width="170" height="40" rx="6" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+  <text x="365" y="335" text-anchor="middle" font-size="10" font-weight="600" fill="#dc2626">Negatiivne hind (-599)</text>
+  <text x="365" y="348" text-anchor="middle" font-size="9" fill="#dc2626">äriloogika vale</text>
+
+  <!-- Fail arrow from Build -->
+  <line x1="585" y1="266" x2="585" y2="310" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow-red)"/>
+  <rect x="500" y="315" width="170" height="40" rx="6" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5"/>
+  <text x="585" y="335" text-anchor="middle" font-size="10" font-weight="600" fill="#dc2626">CMD main.py (vale fail)</text>
+  <text x="585" y="348" text-anchor="middle" font-size="9" fill="#dc2626">konteiner crashib</text>
+
+  <!-- === ROW 4: Result === -->
+  <!-- Arrow down from Push to GHCR -->
+  <line x1="805" y1="266" x2="805" y2="310" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow-green)"/>
+
+  <rect x="720" y="315" width="230" height="55" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" filter="url(#shadow)"/>
+  <text x="835" y="338" text-anchor="middle" font-size="13" font-weight="700" fill="#16a34a">GitHub Container Registry</text>
+  <text x="835" y="356" text-anchor="middle" font-size="10" fill="#64748b">ghcr.io/user/repo:latest</text>
+
+  <!-- === Legend === -->
+  <rect x="30" y="400" width="940" height="105" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="50" y="422" font-size="11" font-weight="700" fill="#1e293b">Mis iga stage teeb:</text>
+
+  <circle cx="55" cy="442" r="5" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="68" y="446" font-size="10" fill="#475569"><tspan font-weight="600">VALIDATE</tspan> — python -m py_compile: kontrollib süntaksit. Kiire, ei vaja dependencies. Leiab puuduvad koolonid, sulud, taanded.</text>
+
+  <circle cx="55" cy="462" r="5" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="68" y="466" font-size="10" fill="#475569"><tspan font-weight="600">TEST</tspan> — pytest: installib Flask'i, käivitab testid. Leiab loogikavead (negatiivne hind, vale API vastus, puuduv väli).</text>
+
+  <circle cx="55" cy="482" r="5" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="68" y="486" font-size="10" fill="#475569"><tspan font-weight="600">BUILD</tspan> — docker build + health check: ehitab image, käivitab konteineri, testib curl'iga. Leiab Dockerfile vead.</text>
+
+  <circle cx="55" cy="502" r="5" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="68" y="506" font-size="10" fill="#475569"><tspan font-weight="600">PUSH</tspan> — docker push ghcr.io: salvestab image registry'sse. Kubernetes saab sealt pull'ida.</text>
+</svg>

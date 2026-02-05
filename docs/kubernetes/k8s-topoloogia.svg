@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 680" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 6" refX="10" refY="3" markerWidth="10" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,3 L0,6 Z" fill="#64748b"/>
+    </marker>
+    <marker id="arr-blue" viewBox="0 0 10 6" refX="10" refY="3" markerWidth="10" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,3 L0,6 Z" fill="#3b82f6"/>
+    </marker>
+    <marker id="arr-purple" viewBox="0 0 10 6" refX="10" refY="3" markerWidth="10" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,3 L0,6 Z" fill="#7c3aed"/>
+    </marker>
+    <filter id="sh" x="-4%" y="-4%" width="108%" height="116%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="680" fill="#f8fafc" rx="8"/>
+
+  <!-- Title -->
+  <text x="500" y="36" text-anchor="middle" font-size="18" font-weight="700" fill="#1e293b">Kubernetes Topoloogia (k3s Labor)</text>
+  <text x="500" y="54" text-anchor="middle" font-size="12" fill="#64748b">Node → Deployment → ReplicaSet → Pods → Service → väline ligipääs</text>
+
+  <!-- === EXTERNAL: Browser === -->
+  <rect x="40" y="75" width="150" height="50" rx="8" fill="#1e293b" filter="url(#sh)"/>
+  <text x="115" y="98" text-anchor="middle" font-size="12" font-weight="600" fill="#f8fafc">Brauser / curl</text>
+  <text x="115" y="113" text-anchor="middle" font-size="10" fill="#94a3b8">:30080</text>
+
+  <!-- Arrow from browser to NodePort -->
+  <line x1="190" y1="100" x2="245" y2="100" stroke="#7c3aed" stroke-width="2" marker-end="url(#arr-purple)"/>
+  <text x="218" y="93" text-anchor="middle" font-size="9" fill="#7c3aed">HTTP</text>
+
+  <!-- === NODE boundary === -->
+  <rect x="250" y="68" width="720" height="595" rx="12" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="270" y="92" font-size="11" font-weight="700" fill="#475569">k3s NODE</text>
+  <text x="270" y="106" font-size="9" fill="#94a3b8">Ubuntu 22.04 VM (10.82.1.10)</text>
+
+  <!-- ============= NGINX STACK ============= -->
+  <text x="410" y="138" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">nginx Stack</text>
+
+  <!-- NodePort Service -->
+  <rect x="270" y="150" width="280" height="55" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2" filter="url(#sh)"/>
+  <text x="310" y="173" font-size="11" font-weight="700" fill="#7c3aed">NodePort Service</text>
+  <text x="310" y="190" font-size="9" fill="#64748b">nginx-nodeport</text>
+  <text x="490" y="173" text-anchor="end" font-size="10" fill="#7c3aed">:30080 → :80</text>
+  <text x="490" y="190" text-anchor="end" font-size="9" fill="#94a3b8">selector: app=nginx</text>
+
+  <!-- ClusterIP Service -->
+  <rect x="270" y="218" width="280" height="55" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="2" filter="url(#sh)"/>
+  <text x="310" y="241" font-size="11" font-weight="700" fill="#3b82f6">ClusterIP Service</text>
+  <text x="310" y="258" font-size="9" fill="#64748b">nginx-service</text>
+  <text x="490" y="241" text-anchor="end" font-size="10" fill="#3b82f6">DNS: nginx-service</text>
+  <text x="490" y="258" text-anchor="end" font-size="9" fill="#94a3b8">selector: app=nginx</text>
+
+  <!-- Arrow from NodePort to ClusterIP -->
+  <line x1="410" y1="205" x2="410" y2="218" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- Deployment box -->
+  <rect x="270" y="290" width="280" height="40" rx="6" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+  <text x="285" y="314" font-size="10" font-weight="700" fill="#10b981">Deployment: nginx-deploy</text>
+  <text x="535" y="314" text-anchor="end" font-size="9" fill="#64748b">replicas: 3</text>
+
+  <!-- Arrow from Service to Deployment -->
+  <line x1="410" y1="273" x2="410" y2="290" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+
+  <!-- ReplicaSet box -->
+  <rect x="285" y="340" width="250" height="30" rx="4" fill="#fff" stroke="#d1d5db" stroke-width="1"/>
+  <text x="410" y="360" text-anchor="middle" font-size="9" fill="#64748b">ReplicaSet: nginx-deploy-7f8b9c (haldab Pod'e)</text>
+
+  <!-- Arrow to RS -->
+  <line x1="410" y1="330" x2="410" y2="340" stroke="#64748b" stroke-width="1" marker-end="url(#arr)"/>
+
+  <!-- 3 Pods -->
+  <rect x="275" y="385" width="80" height="50" rx="6" fill="#fff" stroke="#10b981" stroke-width="1.5" filter="url(#sh)"/>
+  <text x="315" y="406" text-anchor="middle" font-size="10" font-weight="600" fill="#1e293b">Pod 1</text>
+  <text x="315" y="422" text-anchor="middle" font-size="8" fill="#64748b">nginx:1.25</text>
+  <rect x="283" y="427" width="64" height="4" rx="2" fill="#10b981" opacity="0.3"/>
+
+  <rect x="370" y="385" width="80" height="50" rx="6" fill="#fff" stroke="#10b981" stroke-width="1.5" filter="url(#sh)"/>
+  <text x="410" y="406" text-anchor="middle" font-size="10" font-weight="600" fill="#1e293b">Pod 2</text>
+  <text x="410" y="422" text-anchor="middle" font-size="8" fill="#64748b">nginx:1.25</text>
+  <rect x="378" y="427" width="64" height="4" rx="2" fill="#10b981" opacity="0.3"/>
+
+  <rect x="465" y="385" width="80" height="50" rx="6" fill="#fff" stroke="#10b981" stroke-width="1.5" filter="url(#sh)"/>
+  <text x="505" y="406" text-anchor="middle" font-size="10" font-weight="600" fill="#1e293b">Pod 3</text>
+  <text x="505" y="422" text-anchor="middle" font-size="8" fill="#64748b">nginx:1.25</text>
+  <rect x="473" y="427" width="64" height="4" rx="2" fill="#10b981" opacity="0.3"/>
+
+  <!-- Arrows from RS to Pods -->
+  <line x1="340" y1="370" x2="315" y2="385" stroke="#64748b" stroke-width="1" marker-end="url(#arr)"/>
+  <line x1="410" y1="370" x2="410" y2="385" stroke="#64748b" stroke-width="1" marker-end="url(#arr)"/>
+  <line x1="480" y1="370" x2="505" y2="385" stroke="#64748b" stroke-width="1" marker-end="url(#arr)"/>
+
+  <!-- Self-healing annotation -->
+  <rect x="275" y="445" width="280" height="28" rx="4" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+  <text x="415" y="463" text-anchor="middle" font-size="9" fill="#92400e">⟳ Self-healing: Pod kukub → Deployment loob uue automaatselt</text>
+
+  <!-- ============= POSTGRES STACK ============= -->
+  <text x="780" y="138" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">PostgreSQL Stack</text>
+
+  <!-- Secret -->
+  <rect x="680" y="150" width="200" height="45" rx="8" fill="#fdf4ff" stroke="#a855f7" stroke-width="1.5" filter="url(#sh)"/>
+  <text x="710" y="170" font-size="10" font-weight="700" fill="#a855f7">Secret</text>
+  <text x="710" y="184" font-size="9" fill="#64748b">postgres-secret</text>
+  <text x="860" y="177" text-anchor="end" font-size="9" fill="#a855f7">password: base64</text>
+
+  <!-- Arrow from Secret to Deployment -->
+  <line x1="780" y1="195" x2="780" y2="210" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+  <text x="795" y="206" font-size="8" fill="#a855f7">valueFrom</text>
+
+  <!-- ClusterIP Service for PG -->
+  <rect x="680" y="213" width="200" height="50" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="2" filter="url(#sh)"/>
+  <text x="710" y="234" font-size="10" font-weight="700" fill="#3b82f6">ClusterIP Service</text>
+  <text x="710" y="249" font-size="9" fill="#64748b">postgres-service</text>
+  <text x="862" y="234" text-anchor="end" font-size="9" fill="#3b82f6">DNS: postgres-service</text>
+  <text x="862" y="249" text-anchor="end" font-size="8" fill="#94a3b8">:5432</text>
+
+  <!-- Deployment PG -->
+  <rect x="680" y="278" width="200" height="35" rx="6" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+  <text x="695" y="300" font-size="10" font-weight="700" fill="#10b981">Deployment: postgres</text>
+  <text x="866" y="300" text-anchor="end" font-size="9" fill="#64748b">replicas: 1</text>
+
+  <!-- Arrow -->
+  <line x1="780" y1="263" x2="780" y2="278" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+
+  <!-- PG Pod -->
+  <rect x="720" y="328" width="120" height="55" rx="6" fill="#fff" stroke="#10b981" stroke-width="1.5" filter="url(#sh)"/>
+  <text x="780" y="350" text-anchor="middle" font-size="10" font-weight="600" fill="#1e293b">Pod</text>
+  <text x="780" y="366" text-anchor="middle" font-size="9" fill="#64748b">postgres:14-alpine</text>
+  <text x="780" y="378" text-anchor="middle" font-size="8" fill="#a855f7">env: POSTGRES_PASSWORD</text>
+
+  <!-- Arrow -->
+  <line x1="780" y1="313" x2="780" y2="328" stroke="#64748b" stroke-width="1" marker-end="url(#arr)"/>
+
+  <!-- === DNS Test Pod === -->
+  <rect x="580" y="490" width="130" height="45" rx="6" fill="#fff4e6" stroke="#f97316" stroke-width="1.5" filter="url(#sh)"/>
+  <text x="645" y="510" text-anchor="middle" font-size="10" font-weight="600" fill="#1e293b">test-dns Pod</text>
+  <text x="645" y="524" text-anchor="middle" font-size="8" fill="#64748b">busybox (ühekordne)</text>
+
+  <!-- Arrow from test pod to nginx service -->
+  <path d="M 610 490 Q 500 470 430 273" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-blue)"/>
+  <text x="490" y="465" font-size="8" fill="#3b82f6">nslookup nginx-service</text>
+
+  <!-- Arrow from test pod to pg service -->
+  <path d="M 700 490 Q 770 440 780 263" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-blue)"/>
+  <text x="755" y="430" font-size="8" fill="#3b82f6">psql -h postgres-service</text>
+
+  <!-- === LEGEND === -->
+  <rect x="270" y="555" width="680" height="95" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="290" y="575" font-size="10" font-weight="700" fill="#1e293b">Liikluse voog:</text>
+
+  <!-- NodePort flow -->
+  <text x="290" y="595" font-size="9" fill="#475569">
+    <tspan font-weight="600" fill="#7c3aed">Väline:</tspan> Brauser :30080 → NodePort Service → Pod :80 (otse kättesaadav väljast)
+  </text>
+
+  <!-- ClusterIP flow -->
+  <text x="290" y="613" font-size="9" fill="#475569">
+    <tspan font-weight="600" fill="#3b82f6">Sisemine:</tspan> Pod → DNS nimi (nt "postgres-service") → ClusterIP Service → siht-Pod (ainult klastri sees)
+  </text>
+
+  <!-- Self-healing -->
+  <text x="290" y="631" font-size="9" fill="#475569">
+    <tspan font-weight="600" fill="#10b981">Self-healing:</tspan> Pod kukub → Deployment märkab (replicas ≠ tegelik) → loob uue Pod'i automaatselt
+  </text>
+
+  <!-- Labels -->
+  <text x="290" y="645" font-size="9" fill="#475569">
+    <tspan font-weight="600" fill="#a855f7">Secret:</tspan> base64 kodeeritud parool → Deployment loeb env muutujasse (valueFrom.secretKeyRef)
+  </text>
+</svg>
